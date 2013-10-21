@@ -1,27 +1,22 @@
 package edu.upc.eetac.dxat.jesusGavilan.device.manager.api.model;
 
-public class Switch {
+import java.util.HashMap;
+
+
+public class Switch extends Device{
+	private HashMap<Interface, Interface> forwardingTable= null;
 	
-	private String inventoryId;
-	private int ports;
-	private InterfacesCollection interfaces;
-	public String getInventoryId() {
-		return inventoryId;
+	public Switch(){
+		super();
+		this.forwardingTable = new HashMap<Interface, Interface>();
 	}
-	public void setInventoryId(String inventoryId) {
-		this.inventoryId = inventoryId;
+
+	public HashMap<Interface, Interface> getForwardingTable() {
+		return forwardingTable;
 	}
-	public int getPorts() {
-		return ports;
-	}
-	public void setPorts(int ports) {
-		this.ports = ports;
-	}
-	public InterfacesCollection getInterfaces() {
-		return interfaces;
-	}
-	public void setInterfaces(InterfacesCollection interfaces) {
-		this.interfaces = interfaces;
+
+	public void setForwardingTable(HashMap<Interface, Interface> forwardingTable) {
+		this.forwardingTable = forwardingTable;
 	}
 	
 

@@ -1,27 +1,23 @@
 package edu.upc.eetac.dxat.jesusGavilan.device.manager.api.model;
 
-public class Router {
-	private String inventoryId;
-	private int ports;
-	private InterfacesCollection interfaces;
-	public String getInventoryId() {
-		return inventoryId;
+import java.util.HashMap;
+
+public class Router extends Device {
+	private HashMap<Interface, Interface> routingTable = null;
+
+	public Router() {
+		super();
+		this.routingTable = new HashMap<Interface, Interface>();
 	}
-	public void setInventoryId(String inventoryId) {
-		this.inventoryId = inventoryId;
+
+	public HashMap<Interface, Interface> getRoutingTable() {
+		return routingTable;
 	}
-	public int getPorts() {
-		return ports;
-	}
-	public void setPorts(int ports) {
-		this.ports = ports;
-	}
-	public InterfacesCollection getInterfaces() {
-		return interfaces;
-	}
-	public void setInterfaces(InterfacesCollection interfaces) {
-		this.interfaces = interfaces;
-	}
+
+	public void setRoutingTable(HashMap<Interface, Interface> routingTable) {
+		this.routingTable = routingTable;
+	}  
+	
 	
 	
 }
