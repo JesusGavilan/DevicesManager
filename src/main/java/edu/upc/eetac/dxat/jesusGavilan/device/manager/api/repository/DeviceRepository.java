@@ -3,21 +3,20 @@ package edu.upc.eetac.dxat.jesusGavilan.device.manager.api.repository;
 import java.util.HashMap;
 import java.util.Set;
 
+import edu.upc.eetac.dxat.jesusGavilan.device.manager.api.model.Device;
+import edu.upc.eetac.dxat.jesusGavilan.device.manager.api.model.DeviceCollection;
+import edu.upc.eetac.dxat.jesusGavilan.device.manager.api.model.GenericCollection;
 import edu.upc.eetac.dxat.jesusGavilan.device.manager.api.model.Interface;
 import edu.upc.eetac.dxat.jesusGavilan.device.manager.api.model.InterfacesCollection;
 import edu.upc.eetac.dxat.jesusGavilan.device.manager.api.model.Router;
-import edu.upc.eetac.dxat.jesusGavilan.device.manager.api.model.RouterCollection;
 import edu.upc.eetac.dxat.jesusGavilan.device.manager.api.model.Switch;
-import edu.upc.eetac.dxat.jesusGavilan.device.manager.api.model.SwitchCollection;
 import edu.upc.eetac.dxat.jesusGavilan.device.manager.api.utils.MACGenerator;
 
 public class DeviceRepository {
-	private HashMap<String, Router> routersRepository;
-	private HashMap<String, Switch> switchesRepository;
+	private HashMap<String, Device> devicesRepository;
 	private static DeviceRepository instance;
 	private DeviceRepository(){
-		routersRepository  = new HashMap<String, Router>();
-		switchesRepository = new HashMap<String, Switch>();
+		devicesRepository = new HashMap<String, Device>();
 		
 		for(int i=0; i<100; i++){
 			Router r =  new Router();
@@ -33,7 +32,7 @@ public class DeviceRepository {
 			ifc.setMac(Integer.toString(200-i));
 			ifcs.addInterface(ifc);
 			r.setInterfaces(ifcs);
-			routersRepository.put(r.getInventoryId(), r);
+			devicesRepository.put(r.getInventoryId(), r);
 		}
 		for(int i=0;i<25;i++){
 			Switch sw = new Switch();
@@ -47,7 +46,7 @@ public class DeviceRepository {
 			ifc.setMac(MACGenerator.create("SW-" + Integer.toString(i) + "b"));
 			ifcs.addInterface(ifc);
 			sw.setInterfaces(ifcs);
-			switchesRepository.put(sw.getInventoryId(), sw);
+			devicesRepository.put(sw.getInventoryId(), sw);
 			
 		}
 	}
@@ -57,61 +56,43 @@ public class DeviceRepository {
 		return instance;
 	}
 	
-	public void deleteRouter(String inventoryId){
-		routersRepository.remove(inventoryId);
+	public void deleteDevice(String inventoryId){
+		devicesRepository.remove(inventoryId);
 	}
 	
-	public void deleteSwitch(String inventoryId){
-		switchesRepository.remove(inventoryId);
+	public Device getDevice(String inventoryId){
+		return devicesRepository.get(inventoryId);
 	}
 	
-	public Router getRouter(String inventoryId){
-		return routersRepository.get(inventoryId);
-	}
-	
-	public Switch getSwitch(String inventoryId){
-		return switchesRepository.get(inventoryId);
-	}
-	
-	public RouterCollection getRouters(){
-		RouterCollection routers = new RouterCollection();
-		Set<String> s = routersRepository.keySet();
+	public DeviceCollection getDevices(){
+		DeviceCollection devices = new DeviceCollection();
+		Set<String> s = devicesRepository.keySet();
 		for(String id : s ){
-			routers.addRouter(routersRepository.get(id));
+			devices.addDevice(devicesRepository.get(id));
 		}
-		return routers;
-		
+		return devices;
 	}
 	
-	public SwitchCollection getSwitches(){
-		SwitchCollection switches = new SwitchCollection();
-		Set<String> sw = switchesRepository.keySet();
-		for(String id : sw){
-			switches.addSwitch(switchesRepository.get(id));
+	public DeviceCollection getDevices(Class c){
+		DeviceCollection devices = new DeviceCollection();
+		Set<String> s = devicesRepository.keySet();
+		for(String id : s ){
+			Device d = devicesRepository.get(id);
+			if (d.getClass()==c)
+				devices.addDevice(d);
 		}
-		return switches;
+		return devices;
 	}
 	
-	public Router insertRouter(Router router){
-		routersRepository.put(router.getInventoryId(), router);
-		return router;
+	public Device insertDevice(Device device){
+		devicesRepository.put(device.getInventoryId(), device);
+		return device;
 	}
 	
-	public Switch inserSwitch(Switch sw){
-		switchesRepository.put(sw.getInventoryId(), sw);
-		return sw;
-	}
-	
-	public Router updateRouter(Router router){
-		Router r = routersRepository.get(router.getInventoryId());
-		r.setInterfaces(router.getInterfaces());
-		return r;
-	}
-	
-	public Switch updateSwitch(Switch swtch){
-		Switch sw = switchesRepository.get(swtch.getInventoryId());
-		sw.setInterfaces(swtch.getInterfaces());
-		return sw;
+	public Device updateDevice(Device device){
+		Device d = devicesRepository.get(device.getInventoryId());
+		d.setInterfaces(device.getInterfaces());
+		return d;
 	}
 	
 }

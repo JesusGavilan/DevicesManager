@@ -4,18 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RouterCollection {
-	private List<Router> routers;
-	public RouterCollection(){
-		routers = new ArrayList<Router>();
+	
+	private List<Router> devices;
+	
+	public RouterCollection (){
+		devices = new ArrayList<Router>();
 	}
-	public void addRouter(Router router){
-		routers.add(router);
+	
+	public void addRouter(Router d){
+		devices.add(d);
 	}
+	
 	public List<Router> getRouters() {
-		return routers;
+		return devices;
 	}
-	public void setRouters(List<Router> routers) {
-		this.routers = routers;
+
+	public void setRouters(List<Router> devices) {
+		this.devices = devices;
 	}
 
 }

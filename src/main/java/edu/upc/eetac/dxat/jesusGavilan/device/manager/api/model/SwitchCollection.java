@@ -5,22 +5,22 @@ import java.util.List;
 
 public class SwitchCollection {
 	
-	private List<Switch> switches;
+	private List<Switch> devices;
 	
-	public SwitchCollection(){
-		switches = new ArrayList<Switch>();
+	public SwitchCollection (){
+		devices = new ArrayList<Switch>();
 	}
 	
-	public void addSwitch(Switch sw){
-		switches.add(sw);
+	public void addSwitch(Switch d){
+		devices.add(d);
 	}
 	
-	public List<Switch> getSwitches() {
-		return switches;
+	public List<Switch> getSwitchs() {
+		return devices;
 	}
 
-	public void setSwitches(List<Switch> switches) {
-		this.switches = switches;
+	public void setSwitchs(List<Switch> devices) {
+		this.devices = devices;
 	}
 
 }
