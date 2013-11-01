@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Routers</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="css/styles.css" rel="stylesheet" media="screen">
+</head>
+<body>
+	<div id="routers">
+		<!-- ADD DEVICE FORM -->
+		<form id="add-router" class="wrapper">
+			<label>Device name:</label><input id="device-name" name="device-name"
+				type="text" /> <label>IP:</label><input id="device-ip"
+				name="device-ip" type="text" /> <label>Description:</label><input
+				id="device-description" name="device-description" /> <input
+				type="submit" value="Add" onclick="" />
+		</form>
+		<!-- END ADD DEVICE FORM -->
+	</div>
+	<!-- Templates -->
+	<script type="text/template" id="device-template">	
+		<div class="col-6 col-sm-6 col-lg-4">  
+			<h2>Name: <span class="name"><%= ports %></span></h2>
+			<p>Id: <span class="id"><%= id %></span></p>
+			<a href="/devices/<%= id %>" class="details">[details]</a>
+			<a href="#" class="update">[update]</a>
+			<a href="#" class="delete">[delete]</a>
+		</div>	
+		</script>
+<!--  	<script src="js/jquery-1.7.1.js"></script>
+	<script src="js/jquery-ui-1.8.19.custom.min.js"></script>
+	<script src="js/jquery.dateFormat-1.0.js"></script>
+	<script src="js/underscore.js"></script>
+	<script src="js/backbone.js"></script>
+	<script src="js/app.js"></script>
+-->
+
+	<script
+		src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script
+		src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
+	<script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
+	<script src="js/client2.js"></script>
+
+</body>
+</html>
