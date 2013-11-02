@@ -19,7 +19,7 @@ public class DeviceRepository {
 		routersRepository  = new HashMap<String, Router>();
 		switchesRepository = new HashMap<String, Switch>();
 		
-		for(int i=0; i<100; i++){
+		for(int i=0; i<9; i++){
 			Router r =  new Router();
 			r.setInventoryId("RT-" + i);
 			r.setPorts(1);

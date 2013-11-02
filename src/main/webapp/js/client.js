@@ -33,7 +33,7 @@
             //return response;
         }
     });
-	var numDevices = 0;
+	//var numDevices = 0; TODO: control device inventoryId in order to create new devices properly...
 	var devices = new DevicesList();
 
 	var DeviceView = Backbone.View.extend({
@@ -124,54 +124,13 @@
 				success: function(response,xhr) {
 					console.log("Success fetchingg");
 					self.render();
-					//self.collection.push
-
 				},
 				error:function () {
 					console.log(arguments);
 				}	
-				
-					//console.log("Inside success");
-					//console.log(response+' '+xhr);
-					//console.log("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Inside success");
-					//var models = response.models[0];
-					//$.each(models,function(index,value){
-					//	console.log("---->>>>>>>"+ index+" : "+value);
-					//});
-					//console.log("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Inside success");
-					//console.log("UUUUUUUInside Parse");
-
-					// keys
-//					var keys = response.COLUMNS;
-//					console.log("keys = "+keys);
-//					// values
-//					var values = response.DATA;
-//
-//					// Parse the response and construct models
-//					for (var i = 0, length = values.length; i < length; i++) {
-//
-//						var currentValues = values[i];
-//						var deviceObject = {};
-//						for (var j = 0, valuesLength = currentValues.length; j < valuesLength; j++) {
-//							deviceObject[keys[j]] = currentValues[j];
-//						}
-//
-//						// push the model object
-//						this.push(deviceObject);	
-//					}
-//
-//					console.log(this.toJSON());
-//
-//					// return models
-//					return this.models;
-//
-//				},
-//				error: function (errorResponse) {
-//					console.log(errorResponse)
-//				}
 			});
 
-		},					
+		},	
 		render: function(){
 			var self = this;
 			self.$el.html('');
@@ -221,6 +180,30 @@
 
 		var appView = new DevicesView();
 	});
+	
 
 
 })(jQuery);
+
+
+$(function(){
+    $("#loading").spin({lines: 9, // The number of lines to draw
+    	  length: 24, // The length of each line
+    	  width: 7, // The line thickness
+    	  radius: 32, // The radius of the inner circle
+    	  corners: 1, // Corner roundness (0..1)
+    	  rotate: 65, // The rotation offset
+    	  direction: 1, // 1: clockwise, -1: counterclockwise
+    	  color: '#000', // #rgb or #rrggbb or array of colors
+    	  speed: 0.9, // Rounds per second
+    	  trail: 76, // Afterglow percentage
+    	  shadow: true, // Whether to render a shadow
+    	  hwaccel: true, // Whether to use hardware acceleration
+    	  className: 'spinner', // The CSS class to assign to the spinner
+    	  zIndex: 2e9, // The z-index (defaults to 2000000000)
+    	  top: 'auto', // Top position relative to parent in px
+    	  left: 'auto' // Left position relative to parent in px
+    }).hide();
+    $('#loading').ajaxStart(function(){ $(this).fadeIn(); });
+    $('#loading').ajaxComplete(function(){ $(this).fadeOut(); });
+});
