@@ -2,19 +2,36 @@
     var Router = Backbone.Model.extend({
         defaults:{
         	 interfaces: "",
-             ports: "",
+        	 inventoryId: "",
+        	 ports: "",
              routingTable: ""
-        },
-        parse:function (response) {
-            console.log(response);
-            response.id = response.inventoryId;
-            return response;
         }
     });
 
     var RouterCollection = Backbone.Collection.extend({
         model:Router,
-        url:'http://localhost:8080/device-manager-api/webapi/devices/routers'
+        url:'http://localhost:8080/device-manager-api/webapi/devices/routers',
+        parse:function (response) {
+            console.log(response);
+            //response.id = response.inventoryId;
+            // Parse the response and construct models
+            for ( var i = 0, length = response.routers.length; i < length; i++) {
+
+            	var currentValues = response.routers[i];
+            	var devObject = {};
+            	for ( var j = 0, valuesLength = currentValues.length; j < valuesLength; j++) {
+            		devObject[keys[j]] = currentValues[j];
+            	}
+
+            	// push the model object
+            	this.push(devObject);
+            }
+			console.log(this.toJSON());
+			
+			//return models
+			return this.models;
+            //return response;
+        }
     });
 
     var RouterView = Backbone.View.extend({
@@ -61,7 +78,7 @@
             	success:function(response){
             		console.log("Success fetchingg");
                     self.render();
-                    self.collection.push
+                    //self.collection.push
 
             	},
                 error:function () {

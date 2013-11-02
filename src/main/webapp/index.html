@@ -49,9 +49,10 @@
 	    	<header><h1>Add device</h1></header>
 		    <!-- ADD DEVICE FORM -->
 			<form id="add-device" class="wrapper">
-				<label>Device name:</label><input id="device-name" name="device-name" type="text" />
-				<label>IP:</label><input id="device-ip" name="device-ip" type="text" />
-				<label>Description:</label><input id="device-description" name="device-description" />
+				<label>Device name:</label><input id="device-inventoryId" name="device-inventoryId" type="text" />
+				<label># ports:</label><input id="device-ports" name="device-ports" type="text" />
+				<label>Interfaces:</label><input id="device-interfaces" name="device-interfaces" />
+				<label>Routing Table:</label><input id="device-routingTable" name="device-routingTable" />
 				<input type="submit" value="Add" onclick=""/> 
 			</form><!-- END ADD DEVICE FORM -->		
 		</section>
@@ -62,16 +63,14 @@
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 				<script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
 				<script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
-				<script src="js/client2.js"></script>
+				<script src="js/client.js"></script>
 
 		<!-- Templates -->
 		<script type="text/template" id="device-template">	
 		<div class="col-6 col-sm-6 col-lg-4">  
-			<h2>Name: <span class="name"><%= name %></span></h2>
-			<p>Id: <span class="id"><%= id %></span></p>
-			<p>IP: <span class="ip"><%= ip %></span></p>
-			<p>Description: <span class="description"><%= description %></span></p>
-			<a href="/devices/<%= id %>" class="details">[details]</a>
+			<h2>Name: <span class="inventoryId"><%= inventoryId %></span></h2>
+			<p>Ports: <span class="ports"><%= ports %></span></p>
+			<a href="/devices/<%= inventoryId %>" class="details">[details]</a>
 			<a href="#" class="update">[update]</a>
 			<a href="#" class="delete">[delete]</a>
 		</div>	

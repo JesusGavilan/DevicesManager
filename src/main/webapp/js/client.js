@@ -1,35 +1,38 @@
 (function($){
-
-	// Backbone.Model.prototype.idAttribute = '_id';
-
 	var Device = Backbone.Model.extend({
-		// url: '/devices/routers.json',
-		defaults: function(){
-			return {	
-				id: ' ',
-				ip: ' ',
-				name: ' ',
-				description: ' '
-			};			
+		defaults:{
+			interfaces: "",
+			inventoryId: "",
+			ports: "",
+			routingTable: ""
 		}
 	});
 
 	var DevicesList = Backbone.Collection.extend({
 		model: Device,
-		url: 'http://localhost:8080/device-manager-api/webapi/devices/routers/RT-1'
-		// url: '/devices/routers.json',
+		url:'http://localhost:8080/device-manager-api/webapi/devices/routers',
+        parse:function (response) {
+            console.log(response);
+            //response.id = response.inventoryId;
+            // Parse the response and construct models
+            for ( var i = 0, length = response.routers.length; i < length; i++) {
 
-//		,initialize: function () {
-//			this.bind("reset", function (model, options) {
-//				console.log("Inside event");
-//				console.log(model);
-//
-//			});
-//		}
+            	var currentValues = response.routers[i];
+            	var devObject = {};
+            	for ( var j = 0, valuesLength = currentValues.length; j < valuesLength; j++) {
+            		devObject[keys[j]] = currentValues[j];
+            	}
 
-
-
-	});
+            	// push the model object
+            	this.push(devObject);
+            }
+			console.log(this.toJSON());
+			
+			//return models
+			return this.models;
+            //return response;
+        }
+    });
 	var numDevices = 0;
 	var devices = new DevicesList();
 
@@ -119,46 +122,53 @@
 			// get all devices (Backbone.sync powah!!!)
 			this.model.fetch({
 				success: function(response,xhr) {
-					console.log("Inside success");
-					console.log(response+' '+xhr);
-					console.log("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Inside success");
-					var models = response.models[0];
-					$.each(models,function(index,value){
-						console.log("---->>>>>>>"+ index+" : "+value);
-					});
-					console.log("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Inside success");
-
-					
-					console.log("UUUUUUUInside Parse");
-
-					// keys
-					var keys = response.COLUMNS;
-					console.log("keys = "+keys);
-					// values
-					var values = response.DATA;
-
-					// Parse the response and construct models
-					for (var i = 0, length = values.length; i < length; i++) {
-
-						var currentValues = values[i];
-						var deviceObject = {};
-						for (var j = 0, valuesLength = currentValues.length; j < valuesLength; j++) {
-							deviceObject[keys[j]] = currentValues[j];
-						}
-
-						// push the model object
-						this.push(deviceObject);	
-					}
-
-					console.log(this.toJSON());
-
-					// return models
-					return this.models;
+					console.log("Success fetchingg");
+					self.render();
+					//self.collection.push
 
 				},
-				error: function (errorResponse) {
-					console.log(errorResponse)
-				}
+				error:function () {
+					console.log(arguments);
+				}	
+				
+					//console.log("Inside success");
+					//console.log(response+' '+xhr);
+					//console.log("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Inside success");
+					//var models = response.models[0];
+					//$.each(models,function(index,value){
+					//	console.log("---->>>>>>>"+ index+" : "+value);
+					//});
+					//console.log("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Inside success");
+					//console.log("UUUUUUUInside Parse");
+
+					// keys
+//					var keys = response.COLUMNS;
+//					console.log("keys = "+keys);
+//					// values
+//					var values = response.DATA;
+//
+//					// Parse the response and construct models
+//					for (var i = 0, length = values.length; i < length; i++) {
+//
+//						var currentValues = values[i];
+//						var deviceObject = {};
+//						for (var j = 0, valuesLength = currentValues.length; j < valuesLength; j++) {
+//							deviceObject[keys[j]] = currentValues[j];
+//						}
+//
+//						// push the model object
+//						this.push(deviceObject);	
+//					}
+//
+//					console.log(this.toJSON());
+//
+//					// return models
+//					return this.models;
+//
+//				},
+//				error: function (errorResponse) {
+//					console.log(errorResponse)
+//				}
 			});
 
 		},					
@@ -192,8 +202,9 @@
 
 	$(document).ready(function(){
 		$('#add-device').submit(function(ev){
-			var the_id= "RT-"+ ++numDevices;
-			var device = new Device({id:the_id,name:$('#device-name').val(),ip:$('#device-ip').val(),description:$('#device-description').val()});
+			//var the_id= "RT-"+ ++numDevices;
+			//var device = new Device({id:the_id,name:$('#device-name').val(),ip:$('#device-ip').val(),description:$('#device-description').val()});
+			var device = new Device({inventoryId:$('#device-inventoryId').val(),ports:$('#device-ports').val(),interfaces:$('#device-interfaces').val(),routingTable:$('#device-routingTable').val()});
 			devices.add(device);
 			// var device2 = new Device({id:'RT-2',name:'Router
 			// 2',ip:'192.168.1.12',description:'second router'});
