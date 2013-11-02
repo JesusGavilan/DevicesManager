@@ -1,69 +1,81 @@
 <!DOCTYPE html>
 <html>
-	<head>
-        <title>Devices</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <link href="css/styles.css" rel="stylesheet" media="screen">
-	</head>
-	<body>
+<head>
+<title>Devices</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="css/styles.css" rel="stylesheet" media="screen">
+</head>
+<body>
+	<div id="loading"></div>
+	<!-- TOP BAR-->
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<a href="#" class="navbar-brand">Devices Manager beta</a>
+			<button class="navbar-toggle" data-toggle="collapse"
+				data-target=".navHeaderCollapse">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<div class="collapse navbar-collapse navHeaderCollapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="active"><a href="#">Home</a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown">Devices <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Routers</a></li>
+							<li><a href="#">Switches</a></li>
+						</ul></li>
+					<li><a href="#">About</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- END TOP BAR-->
 
-	   <!-- TOP BAR-->
-	    <div class = "navbar navbar-inverse navbar-fixed-top">
-	            <div class = "container">  
-	                    <a href = "#" class = "navbar-brand">Devices Manager beta</a>
-	                    <button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
-	                            <span class = "icon-bar"></span>
-	                            <span class = "icon-bar"></span>
-	                            <span class = "icon-bar"></span>
-	                    </button>
-	                    <div class = "collapse navbar-collapse navHeaderCollapse">                        
-	                            <ul class = "nav navbar-nav navbar-right">
-	                                    <li class = "active"><a href = "#">Home</a></li>
-	                                    <li class = "dropdown">
-	                                            <a href = "#" class = "dropdown-toggle" data-toggle = "dropdown">Devices <b class = "caret"></b></a>
-	                                            <ul class = "dropdown-menu">
-	                                                    <li><a href = "#">Routers</a></li>
-	                                                    <li><a href = "#">Switches</a></li>
-	                                            </ul>
-	                                    </li>
-	                                    <li><a href = "#">About</a></li>
-	                            </ul>
-	                    </div>   
-	            </div>
-	    </div><!-- END TOP BAR-->
-
-<div class="container">
+	<div class="container">
 		<section class="col-md-8">
-			<br><br>
-			<header><h1>Devices</h1></header>
+			<br>
+			<br>
+			<header>
+				<h1>Devices</h1>
+			</header>
 			<div class="row">
-				<div id="devices-container"></div><!--/span-->
+				<div id="devices-container"></div>
+				<!--/span-->
 			</div>
 		</section>
-	    
-	    <section class="col-md-4">
-	    	<br><br>
-	    	<header><h1>Add device</h1></header>
-		    <!-- ADD DEVICE FORM -->
+
+		<section class="col-md-4">
+			<br>
+			<br>
+			<header>
+				<h1>Add device</h1>
+			</header>
+			<!-- ADD DEVICE FORM -->
 			<form id="add-device" class="wrapper">
-				<label>Device name:</label><input id="device-inventoryId" name="device-inventoryId" type="text" />
-				<label># ports:</label><input id="device-ports" name="device-ports" type="text" />
-				<label>Interfaces:</label><input id="device-interfaces" name="device-interfaces" />
-				<label>Routing Table:</label><input id="device-routingTable" name="device-routingTable" />
-				<input type="submit" value="Add" onclick=""/> 
-			</form><!-- END ADD DEVICE FORM -->		
+				<label>Device name:</label><input id="device-inventoryId"
+					name="device-inventoryId" type="text" /> <label># ports:</label><input
+					id="device-ports" name="device-ports" type="text" /> <label>Interfaces:</label><input
+					id="device-interfaces" name="device-interfaces" /> <label>Routing
+					Table:</label><input id="device-routingTable" name="device-routingTable" />
+				<input type="submit" value="Add" onclick="" />
+			</form>
+			<!-- END ADD DEVICE FORM -->
 		</section>
+		</div>
 
-
-                <script src = "http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-                <script src = "js/bootstrap.js"></script>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-				<script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
-				<script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
-				<script src="http://fgnass.github.io/spin.js/dist/spin.min.js"></script>
-				<script src="http://fgnass.github.io/spin.js/jquery.spin.js"></script>
-				<script src="js/client.js"></script>
+		<script
+			src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script
+			src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
+		<script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
+		<script src="http://fgnass.github.io/spin.js/dist/spin.min.js"></script>
+		<script src="http://fgnass.github.io/spin.js/jquery.spin.js"></script>
+		<script src="js/client.js"></script>
 
 		<!-- Templates -->
 		<script type="text/template" id="device-template">	
@@ -75,8 +87,5 @@
 			<a href="#" class="delete">[delete]</a>
 		</div>	
 		</script>
-
-
-	<div id="loading"></div>
-	</body>
+</body>
 </html>

@@ -19,10 +19,15 @@
 
             	var currentValues = response.routers[i];
             	var devObject = {};
-            	for ( var j = 0, valuesLength = currentValues.length; j < valuesLength; j++) {
-            		devObject[keys[j]] = currentValues[j];
-            	}
-
+            	console.log(currentValues);
+//            	for ( var j = 0, valuesLength = currentValues.length; j < valuesLength; j++) {
+//            		console.log(j);
+//            		devObject[keys[j]] = currentValues[j];
+//            	}
+        		devObject.interfaces = currentValues.interfaces;
+        		devObject.routingTable = currentValues.routingTable;
+        		devObject.ports = currentValues.ports;
+        		devObject.inventoryId = currentValues.inventoryId;
             	// push the model object
             	this.push(devObject);
             }
@@ -119,6 +124,8 @@
 			var self = this;
 			this.model.on('add', this.render, this);
 			this.model.on('remove', this.render,this);
+			this.model.bind('request', this.ajaxStart, this);
+			this.model.bind('sync', this.ajaxComplete, this);
 			// get all devices (Backbone.sync powah!!!)
 			this.model.fetch({
 				success: function(response,xhr) {
@@ -204,6 +211,10 @@ $(function(){
     	  top: 'auto', // Top position relative to parent in px
     	  left: 'auto' // Left position relative to parent in px
     }).hide();
-    $('#loading').ajaxStart(function(){ $(this).fadeIn(); });
-    $('#loading').ajaxComplete(function(){ $(this).fadeOut(); });
+    $('#loading').ajaxStart(function(){ 
+    	$(this).fadeIn(); 
+    });
+    $('#loading').ajaxComplete(function(){ 
+    	$(this).fadeOut();
+    });
 });
